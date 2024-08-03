@@ -14,9 +14,6 @@ function Navbar() {
         <Link to='/books' className='navbar-link'>
           Books
         </Link>
-        <Link to='/login' className='navbar-link'>
-          Login
-        </Link>
 
         <Link to='/addbook' className='navbar-link'>
           Add Book
@@ -26,6 +23,9 @@ function Navbar() {
         </Link>
         <Link to='/dashboard' className='navbar-link'>
           Dashboard
+        </Link>
+        <Link to='/login' className='navbar-link'>
+          Login
         </Link>
       </div>
     </nav>

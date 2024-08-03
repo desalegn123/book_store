@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieparser from "cookie-parser";
 import "./db.js";
 import { AdminRouter } from "./routes/auth.js";
+import { studentRouter } from "./routes/Student.js";
 const app = express();
 app.use(express.json());
 app.use(
@@ -15,6 +16,8 @@ app.use(
 app.use(cookieparser());
 dotenv.config();
 app.use("/auth", AdminRouter);
+app.use("/student", studentRouter);
+
 app.listen(process.env.PORT, () => {
   console.log("server is runinnig");
 });
