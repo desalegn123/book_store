@@ -45,22 +45,22 @@ router.post("/login", async (req, res) => {
     return res.json(err);
   }
 });
-// const verifyAdmin = (req, res, next) => {
-//   const token = req.cookies.token; // changed from res.cookies to req.cookies
-//   if (!token) {
-//     return res.json({ message: "Invalid admin" }); // added status code 401
-//   } else {
-//     jwt.verify(token, process.env.Admin_key, (err, decoded) => {
-//       if (err) {
-//         return res.json({ message: "Invalid token" }); // added status code 401
-//       } else {
-//         req.username = decoded.username;
-//         req.role = decoded.role;
-//         next();
-//       }
-//     });
-//   }
-// };
+const verifyAdmin = (req, res, next) => {
+  const token = req.cookies.token; // changed from res.cookies to req.cookies
+  if (!token) {
+    return res.json({ message: "Invalid admin" }); // added status code 401
+  } else {
+    jwt.verify(token, process.env.Admin_key, (err, decoded) => {
+      if (err) {
+        return res.json({ message: "Invalid token" }); // added status code 401
+      } else {
+        req.username = decoded.username;
+        req.role = decoded.role;
+        next();
+      }
+    });
+  }
+};
 // const verifyStudent = (req, res, next) => {
 //   const token = req.cookies.token;
 //   if (!token) {
@@ -77,4 +77,41 @@ router.post("/login", async (req, res) => {
 //     });
 //   }
 // };
+const verifyUser = (req, res, next) => {
+  const token = req.cookies.token; // changed from res.cookies to req.cookies
+  if (!token) {
+    return res.json({ message: "Invalid user" }); // added status code 401
+  } else {
+    jwt.verify(token, process.env.Admin_key, (err, decoded) => {
+      if (err) {
+        jwt.verify(token, process.env.Student_key, (err, decoded) => {
+          if(err){
+            return res.json({ message: "Invalid token" }); // added status code 401
+      } 
+    
+  
+      else {
+        req.username = decoded.username;
+        req.role = decoded.role;
+        next();
+      }
+    })
+    
+  }
+  else {
+    req.username = decoded.username;
+    req.role = decoded.role;
+    next();
+  }
+})
+}
+};
+router.get('/verify',verifyUser,(req, res)=>{
+  return res.json({login:true,role:req.role})
+
+})
+router.get('/logout',(req,res)=>{
+  res.clearCookie('token')
+  return res.json({logout:true})
+})
 export { router as AdminRouter};

@@ -3,19 +3,23 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+const Login=({setRoleVar}) =>{
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("admin");
   const navigate = useNavigate();
-
+   
   const handleSubmit = () => {
+    axios.defaults.withCredentials=true
     axios
       .post("http://localhost:3001/auth/login", { username, password, role })
       .then((res) => {
         if (res.data.login && res.data.role === "admin") {
+          setRoleVar('admin')
           navigate("/dashboard");
+
         } else if (res.data.login && res.data.role === "student") {
+          setRoleVar('student')
           navigate("/");
         }
         console.log(res);

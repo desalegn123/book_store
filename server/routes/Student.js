@@ -3,7 +3,7 @@ import { Student } from "../models/Student.js";
 // import { verifyAdmin } from "./auth.js";
 // import { verifyStudent } from "./auth.js";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
+
 const router = express.Router();
 router.post("/register", async (req, res) => {
   try {

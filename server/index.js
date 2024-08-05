@@ -5,6 +5,7 @@ import cookieparser from "cookie-parser";
 import "./db.js";
 import { AdminRouter } from "./routes/auth.js";
 import { studentRouter } from "./routes/Student.js";
+import { bookRouter } from "./routes/Books.js";
 const app = express();
 app.use(express.json());
 app.use(
@@ -17,6 +18,7 @@ app.use(cookieparser());
 dotenv.config();
 app.use("/auth", AdminRouter);
 app.use("/student", studentRouter);
+app.use("/book",bookRouter)
 
 app.listen(process.env.PORT, () => {
   console.log("server is runinnig");

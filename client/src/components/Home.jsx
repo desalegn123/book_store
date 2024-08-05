@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../css/Home.css"
+import axios from "axios";
 
-function Home() {
+
+const Home=()=>{
+ 
+
   return (
     <div className='hero'>
       <div className='hero-content'>
