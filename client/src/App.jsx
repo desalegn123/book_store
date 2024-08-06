@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import Logout from "./components/Logout";
 import axios from "axios";
 import AddBook from "./components/AddBook";
+import EditBook from "./components/EditBook";
+import Delete from "./components/Delete";
 
 const App=()=>{
   const [role, setRole]=useState('')
@@ -31,12 +33,16 @@ const App=()=>{
       <Navbar role={role}/>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/books' element={<Books />} />
+        <Route path='/books' element={<Books  role={role}/>} />
         <Route path='/addstudent' element={<AddStudent/>} />
         <Route path='/login'  element={<Login setRoleVar={setRole}/>} />
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/logout'  element={<Logout setRole={setRole}/>} />
         <Route path="/addbook" element={<AddBook/>}/>
+        <Route path="/book/:id" element={<EditBook/>} />
+        <Route path="/delete/:id" element={<Delete/>} />
+        
+
       </Routes>
     </BrowserRouter>
   );
